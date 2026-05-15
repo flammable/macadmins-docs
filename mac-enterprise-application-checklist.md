@@ -1,0 +1,8 @@
+- We need a public, consistent URL to download the latest version of the application. Security policy requires us to keep our Macs up to date, and we must test new versions of your application alongside macOS updates to ensure they’re both compatible.
+- CFPreferences is the method to set preferences on the macOS. For admin-provided settings, that would take the form of a configuration profile that’s deployed via a device management server. For settings that exist locally (user preferences), that would take the form of a plist.
+- The application must be distributed in a format that can be mass deployed - either a .pkg or a self-contained .app bundle wrapped in a .dmg disk image.
+- The application must be able to run as a standard (non-admin) user. This includes any directories the application must write to - standard users are unable to write to /Library or /Applications, for example.
+- Dependencies must be kept up to date. This especially applies to Electron, which is essentially just Google Chrome (which has frequent security vulnerabilities).
+- If the application is to be run without interaction from the user, a launchd item (typically a LaunchAgent) must be supplied. This can be included in the .pkg file. Launchd has existed on the macOS since 2005 and is the enterprise method of launching applications and keeping them running in the background. Apple provides methods via device management to prevent users from disabling LaunchAgents, ensuring that your application will continue running.
+- In our org, Macs are wiped all of the time. Your application must be able to handle that gracefully.
+- Your app must be signed and notarized by Apple.
